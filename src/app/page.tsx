@@ -1,8 +1,9 @@
+import About from "@/components/About";
 
 export default function Home() {
   return (
     <main>
-      <div>Home</div>
+      <About />
     </main>
   );
 }

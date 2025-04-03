@@ -57,3 +57,30 @@ export const navbarPaths = [
     href: "/contact",
   },
 ];
+
+export const whatIamDoing = [
+  {
+    id: 1,
+    title: "Usability",
+    description:
+      "Ensures the interface is easy to use, intuitive, and accessible, allowing all users to achieve their goals effortlessly.",
+  },
+  {
+    id: 2,
+    title: "Aesthetics",
+    description:
+      "The visual appeal of a design, driven by consistency design, clear Visual hierarchy, and emotional connection.",
+  },
+  {
+    id: 1,
+    title: "Functionality",
+    description:
+      "Ensures the product works reliably, efficiently, and is scalable to meet user needs and future demands.",
+  },
+  {
+    id: 1,
+    title: "User-Centric Design",
+    description:
+      "Focuses on understanding user needs through empathy, feedback, and continuous improvement based on user input.",
+  },
+];
