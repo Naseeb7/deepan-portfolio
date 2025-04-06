@@ -1,11 +1,11 @@
 import React from "react";
 import Header from "./ui/Header";
 import TextCard from "./ui/TextCard";
-import { whatIamDoing } from "@/constants/defaultState";
+import { experience, tools, whatIamDoing } from "@/constants/defaultState";
+import RightArrow from "@/assets/RightArrow.svg";
+import RatingCard from "./ui/RatingCard";
 
-type Props = {};
-
-const About = (props: Props) => {
+const About = () => {
   return (
     <section className="flex flex-col p-10 gap-11">
       <div>
@@ -26,14 +26,55 @@ const About = (props: Props) => {
           companies.
         </p>
       </div>
-      <div className="w-full flex flex-wrap">
-        {whatIamDoing.map((item) => {
-          return (
-            <div key={item.id} className="flex-1 min-w-1/2">
-              <TextCard title={item.title} description={item.description} />
-            </div>
-          );
-        })}
+
+      <div>
+        <Header text="What I am doing" />
+        <div className="w-full grid grid-cols-2 gap-3">
+          {whatIamDoing.map((item) => {
+            return (
+              <div key={item.id} className="flex-1 min-w-1/2">
+                <TextCard title={item.title} description={item.description} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div>
+        <Header text="Experience" />
+        <div className="w-full grid grid-cols-2 gap-3">
+          {experience.map((item) => {
+            return (
+              <div key={item.id} className="flex-1 min-w-1/2">
+                <TextCard
+                  title={item.title}
+                  subTitle={item.subTitle}
+                  description={item.description}
+                  textContainerStyle="gap-2 w-11/12"
+                  icon={RightArrow}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div>
+        <Header text="Tools" />
+        <div className="w-full grid grid-cols-3 gap-3">
+          {tools.map((item) => {
+            return (
+              <div key={item.id} className="flex-1 min-w-1/3">
+                <RatingCard
+                  title={item.title}
+                  rating={item.rating}
+                  description={item.description}
+                  icon={item.icon}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

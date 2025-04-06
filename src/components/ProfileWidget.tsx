@@ -4,7 +4,7 @@ import React from "react";
 
 const ProfileWidget = () => {
   return (
-    <section className="flex justify-center items-center flex-col px-6 py-10 bg-brand-200 w-full rounded-[20px] gap-6  border border-brand-500">
+    <section className="flex justify-center items-center flex-col px-6 py-10 bg-brand-200 w-full rounded-[20px] gap-6  border border-brand-500 h-fit sticky top-10">
       <div className="bg-brand-400 rounded-2xl">
         <Image src={"/Profile.webp"} alt="Deepan" height={194} width={194} />
       </div>
