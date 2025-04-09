@@ -21,10 +21,12 @@
   --color-brand-500: #2f2f2f;
   --color-brand-600: #242425;
   --color-brand-700: #2c2c2c;
+  --color-brand-800: #2d2d2e;
   --color-light-100: #ffffff;
   --color-light-200: #e8e8e8;
   --color-light-300: #8f8f8f;
   --color-secondary-100: #db2c00;
+  --color-secondary-200: #d43912;
 }
 
 @media (prefers-color-scheme: dark) {

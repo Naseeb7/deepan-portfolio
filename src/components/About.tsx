@@ -4,6 +4,7 @@ import TextCard from "./ui/TextCard";
 import { experience, tools, whatIamDoing } from "@/constants/defaultState";
 import RightArrow from "@/assets/RightArrow.svg";
 import RatingCard from "./ui/RatingCard";
+import Skills from "./Skills";
 
 const About = () => {
   return (
@@ -75,6 +76,9 @@ const About = () => {
             );
           })}
         </div>
+      </div>
+      <div>
+        <Skills />
       </div>
     </section>
   );
