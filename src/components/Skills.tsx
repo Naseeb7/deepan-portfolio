@@ -2,16 +2,15 @@ import React from "react";
 import Header from "./ui/Header";
 import UserCentricDesign from "@/assets/user-centric-design.webp";
 import Location from "@/assets/location.webp";
+import Ergonomics from "@/assets/Ergonomics.webp";
 import Image from "next/image";
 
-type Props = {};
-
-const Skills = (props: Props) => {
+const Skills = () => {
   return (
     <div>
       <Header text="Skills" />
       <div className="flex gap-3">
-        <div className="flex flex-col gap-6 items-center px-3 pt-4  bg-brand-800 rounded-2xl w-[30%]">
+        <div className="flex flex-col gap-6 items-center px-3 pt-4  bg-brand-800 rounded-2xl w-[28%]">
           <div className="flex flex-col items-center ">
             <span className="text-2xl font-bold">Advanced</span>
             <span className="text-xl font-semibold">User-Centric Design</span>
@@ -19,10 +18,10 @@ const Skills = (props: Props) => {
           <Image
             src={UserCentricDesign}
             alt="User centric design"
-            className="h-[300px]"
+            className="h-[325px] w-3/4"
           />
         </div>
-        <div className="flex flex-col gap-3 w-[35%] items-center">
+        <div className="flex flex-col gap-3 w-[38%] items-center">
           <div className="flex bg-brand-800 rounded-2xl w-full p-4">
             <div className="flex flex-col gap-3 w-full">
               <div className="flex justify-between w-full items-center">
@@ -61,14 +60,27 @@ const Skills = (props: Props) => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-3 w-[33%] items-center">
+        <div className="flex flex-col gap-3 w-1/3 items-center">
           <div className="flex flex-col gap-3 p-4 bg-brand-800 rounded-2xl">
             <span className="text-xl font-bold text-secondary-200">
               Specialized in interface design
             </span>
-            <span>Interface, graphic charter, logo, brand image.</span>
+            <span className="text-sm">
+              Interface, graphic charter, logo, brand image.
+            </span>
           </div>
-          <div>Ergonomics</div>
+          <div className="flex flex-col justify-between p-4 bg-brand-800 rounded-2xl w-full h-full">
+            <div className="flex flex-col gap-2">
+              <span className="text-xl font-bold text-secondary-200">
+                Ergonomics.
+              </span>
+              <p className="text-base">
+                Improvement of the ergonomics and creation of a complete
+                interface
+              </p>
+            </div>
+            <Image src={Ergonomics} alt="Ergonomics" />
+          </div>
         </div>
       </div>
     </div>
