@@ -160,3 +160,100 @@ export const tools = [
     rating: 3,
   },
 ];
+
+export const experienceTimeline = [
+  {
+    title: "UI/UX Designer",
+    subtitle: "Hexadecimal Software Pvt. Ltd.",
+    startDate: "20 Jun 2023",
+    endDate: "Present",
+    description:
+      "Worked on designing user-friendly interfaces and enhancing user experiences for web and mobile applications, focusing on usability, aesthetics, and client requirements.",
+  },
+  {
+    title: "UI/UX Design Intern",
+    subtitle: "Acclaim Solution",
+    startDate: "05 Feb 2023",
+    endDate: "15 Jun 2023",
+    description:
+      "Gained hands-on experience in creating wireframes, prototypes, and design systems, collaborating with teams to deliver intuitive design solutions.",
+  },
+  {
+    title: "User Experience Design Intern",
+    subtitle: "Avasoft",
+    startDate: "20 Nov 2021",
+    endDate: "07 May 2022",
+    description:
+      "Conducted user research and usability testing to optimize design processes and improve the overall user experience for digital platforms.",
+  },
+];
+
+export const educationTimeline = [
+  {
+    title: "Builders Engineering College",
+    startDate: "2016",
+    endDate: "2020",
+    description:
+      "I earned a B.E. in Computer Science with a 7.58 CGPA from Builders Engineering College (2016–2020), gaining expertise in programming and software development.",
+  },
+  {
+    title: "Kongu Vellalar Matriculation Higher Secondary School",
+    startDate: "2014",
+    endDate: "2015",
+    description:
+      "I completed my SSLC at Kongu Vellalar Matriculation Secondary School in 2014–2015, securing 78% and building a solid academic foundation.",
+  },
+];
+
+export const mySkills = [
+  {
+    title: "Requirement Gathering",
+    description:
+      "Collecting and analyzing project needs to align design goals with user and business objectives..",
+  },
+  {
+    title: "Business Knowledge",
+    description:
+      "Understanding business goals and objectives to design solutions that align with the company’s vision.",
+  },
+  {
+    title: "User Research",
+    description:
+      "Understanding user behavior, needs, and pain points through interviews, surveys, and observations.",
+  },
+  {
+    title: "User Flow",
+    description:
+      "Designing step-by-step paths that users take to achieve their goals in a product or application.",
+  },
+  {
+    title: "Information Architecture",
+    description:
+      "Structuring and organizing content to make navigation intuitive and user-friendly.",
+  },
+  {
+    title: "Wireframing",
+    description:
+      "Creating low-fidelity layouts to visualize page structure and functionality.",
+  },
+  {
+    title: "Visual Designing",
+    description:
+      "Designing engaging interfaces and creating interactive prototypes for usability testing.",
+  },
+  {
+    title: "Unit Testing",
+    description:
+      "Ensuring design components function as intended by testing individual UI/UX elements.",
+  },
+  {
+    title: "Prototyping",
+    description:
+      "Building interactive models of the design to test and validate user interactions before development.",
+  },
+  {
+    title: "HTML & CSS",
+    description:
+      "Developing responsive and accessible front-end interfaces using coding and Bootstrap framework.",
+  },
+];

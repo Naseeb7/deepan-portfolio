@@ -6,7 +6,6 @@ import React from "react";
 
 const Navbar = () => {
   const pathname = usePathname();
-  console.log("patgname", pathname);
   return (
     <section className="flex bg-brand-600 px-10 py-6 gap-8 rounded-tr-[20px] rounded-bl-4xl">
       {navbarPaths.map((item) => {

@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Personal Portfolio Website",
+    "heroImage": "https://example.com/images/portfolio-hero.jpg",
+    "overview": "This project is a personal portfolio website designed to highlight my skills, projects, and experience.",
+    "challenge": "Creating a responsive design that works seamlessly across all devices.",
+    "photos": [
+      "https://example.com/images/portfolio-1.jpg",
+      "https://example.com/images/portfolio-2.jpg"
+    ],
+    "details": [
+      "Responsive design for all devices.",
+      "Showcases skills, projects, and experience.",
+      "Focus on user experience and accessibility."
+    ]
+  },
+  {
+    "id": 2,
+    "name": "E-commerce Platform",
+    "type": "UI/UX Design",
+    "title": "E-commerce Platform",
+    "heroImage": "https://example.com/images/ecommerce-hero.jpg",
+    "overview": "This project is a full-stack e-commerce platform that allows users to browse, purchase, and manage products.",
+    "challenge": "Designing an intuitive user interface for product browsing and checkout.",
+    "photos": [
+      "https://example.com/images/ecommerce-1.jpg",
+      "https://example.com/images/ecommerce-2.jpg"
+    ],
+    "details": [
+      "Full-stack platform with user authentication.",
+      "Payment integration for seamless transactions.",
+      "Optimized checkout process for better user experience."
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Weather App",
+    "type": "UI/UX Design",
+    "title": "Weather App",
+    "heroImage": "https://example.com/images/weather-hero.jpg",
+    "overview": "This project is a weather app that provides real-time weather updates for any location.",
+    "challenge": "Designing a clean and intuitive interface for displaying weather data.",
+    "photos": [
+      "https://example.com/images/weather-1.jpg",
+      "https://example.com/images/weather-2.jpg"
+    ],
+    "details": [
+      "Real-time weather updates using API.",
+      "Simple and intuitive interface.",
+      "Quick access to weather information."
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Task Manager",
+    "type": "UI/UX Design",
+    "title": "Task Manager",
+    "heroImage": "https://example.com/images/task-manager-hero.jpg",
+    "overview": "This project is a task management app that helps users organize and prioritize their tasks effectively.",
+    "challenge": "Designing a user-friendly interface for task creation and tracking.",
+    "photos": [
+      "https://example.com/images/task-manager-1.jpg",
+      "https://example.com/images/task-manager-2.jpg"
+    ],
+    "details": [
+      "Organize and prioritize tasks effectively.",
+      "User-friendly interface for task management.",
+      "Improves productivity through intuitive features."
+    ]
+  }
+]
