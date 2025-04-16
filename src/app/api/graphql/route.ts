@@ -85,4 +85,9 @@ const server = new ApolloServer({
   resolvers,
 });
 
-export const POST = startServerAndCreateNextHandler(server);
+// Explicitly define the POST handler with proper typing
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const POST = async (req: Request, ctx: any) => {
+  const handler = startServerAndCreateNextHandler(server);
+  return handler(req, ctx);
+};
