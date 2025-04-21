@@ -6,7 +6,7 @@ const ProjectsPage = async () => {
 
   return (
     <section>
-      <Projects projects={projects} />
+      <Projects initialProjects={projects} />
     </section>
   );
 };

@@ -1,4 +1,4 @@
-export const fetchAllProjects = async () => {
+export const fetchAllProjects = async (category?: string) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"}/api/graphql`,
     {
@@ -8,15 +8,18 @@ export const fetchAllProjects = async () => {
       },
       body: JSON.stringify({
         query: `
-          query GetAllProjects {
-            projects {
-              id
-              name
-              heroImage
-              overview
-            }
-          }
-        `,
+                    query GetAllProjects($category: String) {
+                        projects(category: $category) {
+                            id
+                            name
+                            heroImage
+                            category
+                        }
+                    }
+                `,
+        variables: {
+          category,
+        },
       }),
       cache: "no-store", // Prevent caching for fresh data on every request
     }

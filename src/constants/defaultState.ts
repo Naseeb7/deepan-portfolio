@@ -257,3 +257,22 @@ export const mySkills = [
       "Developing responsive and accessible front-end interfaces using coding and Bootstrap framework.",
   },
 ];
+
+export const ProjectCategories = [
+  {
+    label: "All",
+    value: "all",
+  },
+  {
+    label: "Applications",
+    value: "application",
+  },
+  {
+    label: "Dashboards",
+    value: "dashboard",
+  },
+  {
+    label: "Web Design",
+    value: "web-design",
+  },
+];

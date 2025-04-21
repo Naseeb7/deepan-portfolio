@@ -14,7 +14,7 @@ export default gql`
   }
 
   extend type Query {
-    projects: [Project!]!
+    projects(category: String): [Project!]!
     project(id: ID!): Project
   }
 

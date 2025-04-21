@@ -1,32 +1,53 @@
 "use client";
 
-type Project = {
-  id: string;
-  name: string;
-  heroImage: string;
-  overview: string;
-};
+import { Projectcategory, ProjectType } from "@/constants/enums";
+import { fetchAllProjects } from "@/utils/serverActions";
+import { useEffect, useState } from "react";
+import Header from "./ui/Header";
+import { ProjectCategories } from "@/constants/defaultState";
+import ProjectCard from "./ui/ProjectCard";
 
-const Projects = ({ projects }: { projects: Project[] }) => {
+const Projects = ({ initialProjects }: { initialProjects: ProjectType[] }) => {
+  const [projects, setProjects] = useState<ProjectType[]>(initialProjects);
+  // const [loading, setLoading] = useState(false);
+  const [category, setCategory] = useState<string>(Projectcategory.ALL);
+
+  useEffect(() => {
+    const fetchCategoryProjects = async () => {
+      // setLoading(true);
+      const response = await fetchAllProjects(category);
+      setProjects(response);
+      // setLoading(false);
+    };
+
+    if (category !== Projectcategory.ALL) {
+      fetchCategoryProjects();
+    } else {
+      setProjects(initialProjects);
+    }
+  }, [category, initialProjects]);
   return (
-    <section>
-      <h1 className="text-2xl font-bold mb-4">Projects</h1>
+    <section className="flex flex-col p-10">
+      <Header text="Projects" />
+      <div className="flex gap-10 mb-6">
+        {ProjectCategories.map((cat, i) => {
+          return (
+            <span
+              onClick={() => setCategory(cat.value)}
+              key={i}
+              className={`text-xl font-medium hover:cursor-pointer ${
+                category === cat.value ? "text-secondary-100" : ""
+              }`}
+            >
+              {cat.label}
+            </span>
+          );
+        })}
+      </div>
+
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
-          <li
-            key={project.id}
-            className="border rounded-lg p-4 shadow-md hover:shadow-lg transition"
-          >
-            <h2 className="text-xl font-semibold">{project.name}</h2>
-            {project.heroImage && (
-              <img
-                src={project.heroImage}
-                alt={project.name}
-                className="w-full h-48 object-cover rounded-md mt-2"
-              />
-            )}
-            <p className="text-gray-600 mt-2">{project.overview}</p>
-          </li>
+        {projects.map((project, i) => (
+          <ProjectCard key={i} {...project} />
         ))}
       </ul>
     </section>

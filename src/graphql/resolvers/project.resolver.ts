@@ -4,9 +4,10 @@ import { connectToDatabase } from "@/utils/mongoose";
 
 const ProjectResolver = {
   Query: {
-    projects: async () => {
+    projects: async (_: any, { category }: any) => {
       await connectToDatabase();
-      return await Project.find();
+      const filter = category ? { category } : {};
+      return await Project.find(filter);
     },
     project: async (_: any, { id }: any) => {
       await connectToDatabase();
