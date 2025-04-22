@@ -1,5 +1,5 @@
 import User from "@/app/models/Users.mo";
-import { connectToDatabase } from "@/utils/mongoose";
+import { connectToDatabase } from "@/utils/mongoose.ut";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 

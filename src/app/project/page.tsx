@@ -1,5 +1,5 @@
 import Projects from "@/components/Projects";
-import { fetchAllProjects } from "@/utils/serverActions";
+import { fetchAllProjects } from "@/utils/serverActions.ut";
 
 const ProjectsPage = async () => {
   const projects = await fetchAllProjects();

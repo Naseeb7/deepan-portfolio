@@ -1,5 +1,5 @@
 import Contact from "@/app/models/Contacts.mo";
-import { connectToDatabase } from "@/utils/mongoose";
+import { connectToDatabase } from "@/utils/mongoose.ut";
 
 const ContactResolver = {
   Mutation: {

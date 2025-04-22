@@ -1,6 +1,6 @@
 import Project from "@/app/models/Project.mo";
-import { verifyAdmin } from "@/utils/auth";
-import { connectToDatabase } from "@/utils/mongoose";
+import { verifyAdmin } from "@/utils/auth.ut";
+import { connectToDatabase } from "@/utils/mongoose.ut";
 
 const ProjectResolver = {
   Query: {
@@ -11,7 +11,7 @@ const ProjectResolver = {
     },
     project: async (_: any, { id }: any) => {
       await connectToDatabase();
-      return await Project.findOne({ id });
+      return await Project.findOne({ _id: id });
     },
   },
   Mutation: {

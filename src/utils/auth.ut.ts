@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { connectToDatabase } from "./mongoose";
+import { connectToDatabase } from "./mongoose.ut";
 import User from "@/app/models/Users.mo";
 
 const SECRET = process.env.JWT_SECRET || "secret123";

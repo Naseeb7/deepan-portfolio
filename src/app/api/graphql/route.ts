@@ -1,5 +1,5 @@
 import { resolvers, typeDefs } from "@/graphql/schema";
-import { connectToDatabase } from "@/utils/mongoose";
+import { connectToDatabase } from "@/utils/mongoose.ut";
 import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 

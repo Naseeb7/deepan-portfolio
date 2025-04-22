@@ -10,4 +10,9 @@ export type ProjectType = {
   name: string;
   heroImage: string;
   category: string;
+  overview: string;
+  challenge: string;
+  photos: string[];
+  details: string[];
+  url: string;
 };
