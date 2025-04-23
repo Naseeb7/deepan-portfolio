@@ -3,13 +3,21 @@ import { gql } from "graphql-tag";
 export default gql`
   type Contact {
     id: ID!
-    name: String
+    firstName: String
+    lastName: String
     email: String
+    phone: String
     message: String
     createdAt: String
   }
 
   extend type Mutation {
-    submitContact(name: String, email: String, message: String): Contact
+    submitContact(
+      firstName: String
+      lastName: String
+      email: String
+      phone: String
+      message: String
+    ): Contact
   }
 `;

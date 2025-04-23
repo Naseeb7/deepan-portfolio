@@ -1,4 +1,4 @@
-import Contact from "@/app/models/Contacts.mo";
+import Contact from "@/models/Contacts.mo";
 import { connectToDatabase } from "@/utils/mongoose.ut";
 
 const ContactResolver = {

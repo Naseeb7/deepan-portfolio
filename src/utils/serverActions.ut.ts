@@ -64,3 +64,69 @@ export const fetchProjectById = async (id: string) => {
   const { data } = await response.json();
   return data?.project || null;
 };
+
+export const submitContactForm = async (props: {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  message: string;
+}) => {
+  const { firstName, lastName, email, phone, message } = props;
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"}/api/graphql`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
+                    mutation SubmitContactForm(
+                      $firstName: String, 
+                      $lastName: String, 
+                      $email: String, 
+                      $phone: String, 
+                      $message: String
+                    ) {
+                        submitContact(
+                          firstName: $firstName, 
+                          lastName: $lastName, 
+                          email: $email, 
+                          phone: $phone, 
+                          message: $message
+                        ) {
+                            firstName
+                            lastName
+                            email
+                            phone
+                            message
+                        }
+                    }
+                `,
+        variables: {
+          firstName,
+          lastName,
+          email,
+          phone,
+          message,
+        },
+      }),
+      cache: "no-cache",
+    }
+  );
+
+  const { data } = await response.json();
+  if (data?.submitContact) {
+    return {
+      ...data.submitContact,
+      success: true,
+    };
+  } else {
+    return {
+      success: false,
+      message: "An error occurred",
+    };
+  }
+};

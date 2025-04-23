@@ -24,11 +24,11 @@ ProjectType) => {
         className="h-[440px] w-full object-cover rounded-4xl"
       />
       <div>
-        <Header text="Overview" textClassName="text-2xl" />
+        <Header text="Overview" textClassName="!text-2xl" />
         <p>{overview}</p>
       </div>
       <div>
-        <Header text="Challenge" textClassName="text-2xl" />
+        <Header text="Challenge" textClassName="!text-2xl" />
         <p>{challenge}</p>
       </div>
       <div className="grid grid-cols-2 grid-rows-2 gap-4 h-[440px]">
@@ -56,7 +56,7 @@ ProjectType) => {
       </div>
 
       <div>
-        <Header text="Project Details" textClassName="text-2xl" />
+        <Header text="Project Details" textClassName="!text-2xl" />
         <ul className="list-disc pl-5">
           {details.map((detail, index) => (
             <li key={index}>{detail}</li>

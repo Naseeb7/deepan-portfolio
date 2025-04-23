@@ -1,4 +1,4 @@
-import Project from "@/app/models/Project.mo";
+import Project from "@/models/Project.mo";
 import { verifyAdmin } from "@/utils/auth.ut";
 import { connectToDatabase } from "@/utils/mongoose.ut";
 
