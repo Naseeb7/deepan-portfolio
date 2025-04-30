@@ -9,21 +9,23 @@ import ProjectCard from "./ui/ProjectCard";
 import ProjectSection from "./ProjectSection";
 import CrossIcon from "@/assets/CrossIcon.svg";
 import Image from "next/image";
+import AllProjectsSkeleton from "./ui/AllProjectsSkeleton";
+import SingleProjectSkeleton from "./ui/SingleProjectSkeleton";
 
 const Projects = ({ initialProjects }: { initialProjects: ProjectType[] }) => {
   const [projects, setProjects] = useState<ProjectType[]>(initialProjects);
   const [selectedProject, setSelectedProject] = useState<ProjectType | null>(
     null
   );
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState<string>(Projectcategory.ALL);
+  const [projectLoading, setProjectLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const fetchCategoryProjects = async () => {
-      // setLoading(true);
       const response = await fetchAllProjects(category);
       setProjects(response);
-      // setLoading(false);
     };
 
     if (category !== Projectcategory.ALL) {
@@ -31,16 +33,19 @@ const Projects = ({ initialProjects }: { initialProjects: ProjectType[] }) => {
     } else {
       setProjects(initialProjects);
     }
+    setLoading(false);
   }, [category, initialProjects]);
 
   const handleProjectClick = async (id: string) => {
-    // Handle project click event here
+    setProjectLoading(true);
+    setSelectedProject(null); // Open the modal immediately
     const response = await fetchProjectById(id);
     setSelectedProject(response);
+    setProjectLoading(false);
   };
 
   useEffect(() => {
-    if (selectedProject) {
+    if (selectedProject || projectLoading) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -49,7 +54,7 @@ const Projects = ({ initialProjects }: { initialProjects: ProjectType[] }) => {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [selectedProject]);
+  }, [selectedProject, projectLoading]);
 
   return (
     <section className="flex flex-col p-10">
@@ -70,26 +75,35 @@ const Projects = ({ initialProjects }: { initialProjects: ProjectType[] }) => {
         })}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {projects.map((project, i) => (
-          <div
-            onClick={() => handleProjectClick(project.id)}
-            className="hover:cursor-pointer"
-            key={i}
-          >
-            <ProjectCard {...project} />
-          </div>
-        ))}
-      </div>
-      {selectedProject && (
-        <div className="flex fixed top-0 left-0 right-0 bottom-0 bg-brand-100 px-20 py-10 bg-opacity-50 z-50 animate-slide-up overflow-auto ">
+      {loading ? (
+        <AllProjectsSkeleton />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {projects.map((project, i) => (
+            <div
+              onClick={() => handleProjectClick(project.id)}
+              className="hover:cursor-pointer"
+              key={i}
+            >
+              <ProjectCard {...project} />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {(selectedProject || projectLoading) && (
+        <div className="flex fixed top-0 left-0 right-0 bottom-0 bg-brand-100 px-20 py-10 bg-opacity-50 z-50 animate-slide-up overflow-auto">
           <Image
             onClick={() => setSelectedProject(null)}
             src={CrossIcon}
             alt="Close"
             className="absolute top-18 right-28 hover:cursor-pointer z-60"
           />
-          <ProjectSection {...selectedProject} />
+          {projectLoading ? (
+            <SingleProjectSkeleton />
+          ) : (
+            selectedProject && <ProjectSection {...selectedProject} />
+          )}
         </div>
       )}
     </section>
