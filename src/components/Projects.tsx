@@ -11,15 +11,22 @@ import CrossIcon from "@/assets/CrossIcon.svg";
 import Image from "next/image";
 import AllProjectsSkeleton from "./ui/AllProjectsSkeleton";
 import SingleProjectSkeleton from "./ui/SingleProjectSkeleton";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Projects = ({ initialProjects }: { initialProjects: ProjectType[] }) => {
+  const { isAdmin } = useAuth();
   const [projects, setProjects] = useState<ProjectType[]>(initialProjects);
   const [selectedProject, setSelectedProject] = useState<ProjectType | null>(
     null
   );
+
   const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState<string>(Projectcategory.ALL);
   const [projectLoading, setProjectLoading] = useState(false);
+
+  useEffect(() => {
+    console.log("object", projects);
+  }, [projects]);
 
   useEffect(() => {
     setLoading(true);
@@ -59,20 +66,32 @@ const Projects = ({ initialProjects }: { initialProjects: ProjectType[] }) => {
   return (
     <section className="flex flex-col p-10">
       <Header text="Projects" />
-      <div className="flex gap-10 mb-6">
-        {ProjectCategories.map((cat, i) => {
-          return (
-            <span
-              onClick={() => setCategory(cat.value)}
-              key={i}
-              className={`text-xl font-medium hover:cursor-pointer ${
-                category === cat.value ? "text-secondary-100" : ""
-              }`}
-            >
-              {cat.label}
-            </span>
-          );
-        })}
+      <div className="flex justify-between mb-6 items-center">
+        <div className="flex gap-10">
+          {ProjectCategories.map((cat, i) => {
+            return (
+              <span
+                onClick={() => setCategory(cat.value)}
+                key={i}
+                className={`text-xl font-medium hover:cursor-pointer ${
+                  category === cat.value ? "text-secondary-100" : ""
+                }`}
+              >
+                {cat.label}
+              </span>
+            );
+          })}
+        </div>
+        {isAdmin && (
+          <div
+            onClick={() => {
+              window.location.href = "/project/add";
+            }}
+            className="flex px-6 py-1 justify-center rounded-xl bg-secondary-100 hover:cursor-pointer hover:bg-secondary-100/80"
+          >
+            Add Project
+          </div>
+        )}
       </div>
 
       {loading ? (
@@ -82,7 +101,7 @@ const Projects = ({ initialProjects }: { initialProjects: ProjectType[] }) => {
           {projects.map((project, i) => (
             <div
               onClick={() => handleProjectClick(project.id)}
-              className="hover:cursor-pointer"
+              className="hover:cursor-pointer flex w-full"
               key={i}
             >
               <ProjectCard {...project} />

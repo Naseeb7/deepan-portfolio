@@ -20,7 +20,6 @@ export default gql`
 
   extend type Mutation {
     addProject(
-      id: ID!
       name: String!
       heroImage: String
       overview: String
@@ -32,7 +31,6 @@ export default gql`
     ): Project
     deleteProject(id: ID!): Boolean
     updateProject(
-      id: ID!
       name: String
       heroImage: String
       overview: String
@@ -43,4 +41,6 @@ export default gql`
       category: String
     ): Project
   }
+
+  scalar Upload
 `;

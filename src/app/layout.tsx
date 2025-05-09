@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import ProfileWidget from "@/components/ProfileWidget";
 import Navbar from "@/components/Navbar";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -23,15 +24,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.variable} antialiased flex flex-row gap-6`}>
-        <div className="flex w-1/4">
-          <ProfileWidget />
-        </div>
-        <div className="flex w-3/4 relative bg-brand-200 rounded-[20px]">
-          <div className="absolute right-0 top-0">
-            <Navbar />
+        <AuthProvider>
+          <div className="flex w-1/4">
+            <ProfileWidget />
           </div>
-          {children}
-        </div>
+          <div className="flex w-3/4 relative bg-brand-200 rounded-[20px]">
+            <div className="absolute right-0 top-0">
+              <Navbar />
+            </div>
+            {children}
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );
