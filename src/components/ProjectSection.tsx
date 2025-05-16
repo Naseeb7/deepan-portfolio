@@ -5,8 +5,11 @@ import Image from "next/image";
 import DummyImage from "@/assets/dummyImage.png";
 import ConnectArrow from "@/assets/ConnectArrow.svg";
 import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
+import { deleteProject } from "@/utils/serverActions.ut";
 
 const ProjectSection = ({
+  id,
   name,
   heroImage,
   challenge,
@@ -14,9 +17,41 @@ const ProjectSection = ({
   overview,
   photos,
 }: ProjectType) => {
+  const { isAdmin } = useAuth();
+
+  const handleDelete = async () => {
+    // Implement delete functionality here
+    const response = await deleteProject(id);
+    if (response === true) {
+      // Handle successful deletion (e.g., show a success message, redirect, etc.)
+      window.location.reload();
+    } else {
+      // Handle error (e.g., show an error message)
+      alert("Error deleting project");
+    }
+  };
   return (
     <div className="flex flex-col w-full gap-11 bg-brand-200 p-10 relative rounded-[20px] h-fit">
-      <Header text={name} containerClassName="pb-0" />
+      <div className="flex gap-10 items-center">
+        <Header text={name} containerClassName="pb-0" />
+
+        {isAdmin && (
+          <div className="flex gap-4">
+            <Link
+              href={`/project/edit/${id}`}
+              className=" flex px-6 py-1 justify-center rounded-xl bg-secondary-100 hover:cursor-pointer hover:bg-secondary-100/80"
+            >
+              Edit
+            </Link>
+            <button
+              onClick={handleDelete}
+              className=" flex px-6 py-1 justify-center rounded-xl bg-red-500 hover:cursor-pointer hover:bg-red-400"
+            >
+              Delete
+            </button>
+          </div>
+        )}
+      </div>
 
       <Image
         src={heroImage || DummyImage}

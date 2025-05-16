@@ -7,7 +7,7 @@ const ProjectsPage = async () => {
   const projects = await fetchAllProjects();
 
   return (
-    <section>
+    <section className="flex  w-full">
       <Projects initialProjects={projects} />
     </section>
   );

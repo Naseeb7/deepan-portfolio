@@ -23,14 +23,14 @@ const ProjectResolver = {
     deleteProject: async (_: any, { id }: any, context: any) => {
       await verifyAdmin(context.token);
       await connectToDatabase();
-      const result = await Project.deleteOne({ id });
+      const result = await Project.deleteOne({ _id: id });
       return result.deletedCount === 1;
     },
     updateProject: async (_: any, args: any, context: any) => {
       await verifyAdmin(context.token);
       await connectToDatabase();
       const result = await Project.findOneAndUpdate(
-        { id: args.id },
+        { _id: args.id },
         {
           $set: { ...args },
         },

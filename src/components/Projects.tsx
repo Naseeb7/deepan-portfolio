@@ -64,9 +64,9 @@ const Projects = ({ initialProjects }: { initialProjects: ProjectType[] }) => {
   }, [selectedProject, projectLoading]);
 
   return (
-    <section className="flex flex-col p-10">
+    <section className="flex flex-col p-10 w-full">
       <Header text="Projects" />
-      <div className="flex justify-between mb-6 items-center">
+      <div className="flex justify-between mb-6 items-center w-full">
         <div className="flex gap-10">
           {ProjectCategories.map((cat, i) => {
             return (

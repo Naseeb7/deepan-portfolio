@@ -31,6 +31,7 @@ export default gql`
     ): Project
     deleteProject(id: ID!): Boolean
     updateProject(
+      id: ID!
       name: String
       heroImage: String
       overview: String

@@ -32,7 +32,10 @@ export const fetchAllProjects = async (category?: string) => {
   return data?.projects || [];
 };
 
-export const fetchProjectById = async (id: string) => {
+export const fetchProjectById = async (
+  id: string,
+  cache_strategy: RequestCache = "force-cache"
+) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"}/api/graphql`,
     {
@@ -60,7 +63,7 @@ export const fetchProjectById = async (id: string) => {
           id,
         },
       }),
-      cache: "force-cache",
+      cache: cache_strategy,
     }
   );
 
@@ -178,7 +181,7 @@ export async function uploadImage(file: File): Promise<string> {
     formData.append("file", file);
     const cookieStore = await cookies();
     const authHeader = cookieStore.get("token")?.value;
-
+    console.log("uploadImage", file);
     const res = await fetch(
       `${
         process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
@@ -288,5 +291,142 @@ export async function addProject(data: any): Promise<any> {
     // Log the error and rethrow it
     console.error("Error adding project:", error.message);
     throw new Error(error.message || "An unknown error occurred");
+  }
+}
+
+export async function updateProject(data: any): Promise<any> {
+  try {
+    // Get token from cookies
+    const cookieStore = await cookies();
+    const authHeader = cookieStore.get("token")?.value;
+
+    if (!authHeader) {
+      throw new Error("Authorization token missing");
+    }
+
+    // Prepare GraphQL query and variables
+    const query = `
+      mutation UpdateProject(
+        $id: ID!,
+        $name: String, 
+        $heroImage: String, 
+        $overview: String, 
+        $challenge: String, 
+        $photos: [String!], 
+        $details: [String!], 
+        $url: String, 
+        $category: String
+      ) {
+        updateProject(
+          id: $id,
+          name: $name, 
+          heroImage: $heroImage, 
+          overview: $overview, 
+          challenge: $challenge, 
+          photos: $photos, 
+          details: $details, 
+          url: $url, 
+          category: $category
+        ) {
+          name 
+          heroImage 
+          overview 
+          challenge 
+          photos 
+          details 
+          url 
+          category 
+        }
+      }`;
+
+    const res = await fetch(
+      `${
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
+      }/api/graphql`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authHeader}`,
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          query,
+          variables: { ...data },
+        }),
+      }
+    );
+
+    // Check if the response is okay
+    if (!res.ok) {
+      throw new Error(`GraphQL request failed with status: ${res.status}`);
+    }
+
+    const json = await res.json();
+
+    // Handle GraphQL errors if they exist
+    if (json.errors) {
+      const errorMessage = json.errors
+        .map((error: any) => error.message)
+        .join(", ");
+      throw new Error(`GraphQL Error: ${errorMessage}`);
+    }
+
+    return json.data.updateProject;
+  } catch (error: any) {
+    // Log the error and rethrow it
+    console.error("Error adding project:", error.message);
+    throw new Error(error.message || "An unknown error occurred");
+  }
+}
+
+export async function deleteProject(id: string): Promise<boolean> {
+  try {
+    // Retrieve token from cookies
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+
+    if (!token) {
+      throw new Error("Authorization token is missing.");
+    }
+
+    const query = `
+      mutation DeleteProject($id: ID!) {
+        deleteProject(id: $id)
+      }
+    `;
+
+    const response = await fetch(
+      `${
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
+      }/api/graphql`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          query,
+          variables: { id },
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Network error: ${response.statusText}`);
+    }
+
+    const { data, errors } = await response.json();
+
+    if (errors) {
+      const messages = errors.map((e: any) => e.message).join(", ");
+      throw new Error(`GraphQL error: ${messages}`);
+    }
+
+    return data?.deleteProject ?? false;
+  } catch (err: any) {
+    console.error("Failed to delete project:", err.message);
+    throw new Error(err.message || "Failed to delete project.");
   }
 }
