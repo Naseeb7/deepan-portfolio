@@ -14,6 +14,7 @@ const ProjectCard = ({ name, category, heroImage }: ProjectType) => {
         height={192}
         sizes="(max-width: 768px) 100vw, 33vw"
         className="rounded-2xl h-[192px] object-cover"
+        loading="eager"
       />
 
       <div className="flex flex-col gap-1">

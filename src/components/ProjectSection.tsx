@@ -16,6 +16,7 @@ const ProjectSection = ({
   details,
   overview,
   photos,
+  url,
 }: ProjectType) => {
   const { isAdmin } = useAuth();
 
@@ -45,7 +46,7 @@ const ProjectSection = ({
             </Link>
             <button
               onClick={handleDelete}
-              className=" flex px-6 py-1 justify-center rounded-xl bg-red-500 hover:cursor-pointer hover:bg-red-400"
+              className=" flex px-6 py-1 justify-center rounded-xl bg-red-600 hover:cursor-pointer hover:bg-red-700"
             >
               Delete
             </button>
@@ -108,6 +109,17 @@ const ProjectSection = ({
             <li key={index}>{detail}</li>
           ))}
         </ul>
+      </div>
+
+      <div>
+        <Header text="Checkout Project " textClassName="!text-2xl" />
+        <Link
+          href={url}
+          target="_blank"
+          className="text-secondary-100 hover:underline"
+        >
+          {url}
+        </Link>
       </div>
 
       <div className="flex flex-col gap-10">
