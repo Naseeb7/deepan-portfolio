@@ -1,10 +1,10 @@
-import { ProjectType } from "@/constants/enums";
+import { ProjectFieldTypes } from "@/constants/enums";
 import Image from "next/image";
 import React from "react";
 import DummyImage from "@/assets/dummyImage.png";
 import { replaceAndCapitalize } from "@/utils/commonutil.ut";
 
-const ProjectCard = ({ name, category, heroImage }: ProjectType) => {
+const ProjectCard = ({ name, category, heroImage }: ProjectFieldTypes) => {
   return (
     <div className="flex flex-col gap-3 hover:cursor-pointer">
       <Image

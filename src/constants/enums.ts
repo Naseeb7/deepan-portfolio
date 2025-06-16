@@ -5,8 +5,9 @@ export enum Projectcategory {
   DASHBOARD = "dashboard",
 }
 
-export type ProjectType = {
+export type ProjectFieldTypes = {
   id: string;
+  type: ProjectType;
   name: string;
   heroImage: string;
   category: string;
@@ -16,3 +17,8 @@ export type ProjectType = {
   details: string[];
   url: string;
 };
+
+export enum ProjectType {
+  PROJECT = "project",
+  CASE_STUDY = "case_study",
+}

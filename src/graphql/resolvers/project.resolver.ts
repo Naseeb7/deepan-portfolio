@@ -1,12 +1,18 @@
+import { Projectcategory, ProjectType } from "@/constants/enums";
 import Project from "@/models/Project.mo";
 import { verifyAdmin } from "@/utils/auth.ut";
 import { connectToDatabase } from "@/utils/mongoose.ut";
 
 const ProjectResolver = {
   Query: {
-    projects: async (_: any, { category }: any) => {
+    projects: async (
+      _: any,
+      { category, type }: { category: Projectcategory; type: ProjectType }
+    ) => {
       await connectToDatabase();
-      const filter = category ? { category } : {};
+      const filter: any = {};
+      if (category) filter.category = category;
+      if (type) filter.type = type;
       return await Project.find(filter);
     },
     project: async (_: any, { id }: any) => {

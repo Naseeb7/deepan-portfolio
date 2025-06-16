@@ -8,6 +8,7 @@ import AdobeXD from "@/assets/AdobeXD.svg";
 import Sketch from "@/assets/Sketch.svg";
 import Balsamiq from "@/assets/Balsamiq.svg";
 import Illustrator from "@/assets/Illustrator.svg";
+import { Projectcategory, ProjectType } from "./enums";
 
 export const profileWidgetDetails = [
   {
@@ -261,18 +262,29 @@ export const mySkills = [
 export const ProjectCategories = [
   {
     label: "All",
-    value: "all",
+    value: Projectcategory.ALL,
   },
   {
     label: "Applications",
-    value: "application",
+    value: Projectcategory.APPLICATION,
   },
   {
     label: "Dashboards",
-    value: "dashboard",
+    value: Projectcategory.DASHBOARD,
   },
   {
     label: "Web Design",
-    value: "web-design",
+    value: Projectcategory.WEBDESIGN,
+  },
+];
+
+export const ProjectTypeValues = [
+  {
+    label: "Project",
+    value: ProjectType.PROJECT,
+  },
+  {
+    label: "Case Study",
+    value: ProjectType.CASE_STUDY,
   },
 ];

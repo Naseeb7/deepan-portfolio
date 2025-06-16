@@ -1,4 +1,4 @@
-import { ProjectType } from "@/constants/enums";
+import { ProjectFieldTypes, ProjectType } from "@/constants/enums";
 import React from "react";
 import Header from "./ui/Header";
 import Image from "next/image";
@@ -10,6 +10,7 @@ import { deleteProject } from "@/utils/serverActions.ut";
 
 const ProjectSection = ({
   id,
+  type,
   name,
   heroImage,
   challenge,
@@ -17,7 +18,7 @@ const ProjectSection = ({
   overview,
   photos,
   url,
-}: ProjectType) => {
+}: ProjectFieldTypes) => {
   const { isAdmin } = useAuth();
 
   const handleDelete = async () => {
@@ -112,7 +113,12 @@ const ProjectSection = ({
       </div>
 
       <div>
-        <Header text="Checkout Project " textClassName="!text-2xl" />
+        <Header
+          text={`Checkout ${
+            type === ProjectType.PROJECT ? "Project" : "Complete Case Study"
+          }`}
+          textClassName="!text-2xl"
+        />
         <Link
           href={url}
           target="_blank"

@@ -1,7 +1,11 @@
 "use server";
+import { Projectcategory, ProjectType } from "@/constants/enums";
 import { cookies } from "next/headers";
 
-export const fetchAllProjects = async (category?: string) => {
+export const fetchAllProjects = async (
+  type: ProjectType = ProjectType.PROJECT,
+  category?: Projectcategory
+) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"}/api/graphql`,
     {
@@ -11,8 +15,9 @@ export const fetchAllProjects = async (category?: string) => {
       },
       body: JSON.stringify({
         query: `
-                    query GetAllProjects($category: String) {
-                        projects(category: $category) {
+                    query GetAllProjects($category: String, $type: String) {
+                        projects(category: $category, type: $type) {
+                        type
                             id
                             name
                             heroImage
@@ -22,6 +27,7 @@ export const fetchAllProjects = async (category?: string) => {
                 `,
         variables: {
           category,
+          type,
         },
       }),
       cache: "no-cache",
@@ -47,6 +53,7 @@ export const fetchProjectById = async (
         query: `
                     query GetProjectById($id: ID!) {
                         project(id: $id) {
+                            type
                             id
                             name
                             heroImage
@@ -223,6 +230,7 @@ export async function addProject(data: any): Promise<any> {
     // Prepare GraphQL query and variables
     const query = `
       mutation AddProject(
+        $type: String = "project",
         $name: String!, 
         $heroImage: String, 
         $overview: String, 
@@ -233,6 +241,7 @@ export async function addProject(data: any): Promise<any> {
         $category: String
       ) {
         addProject(
+          type: $type,
           name: $name, 
           heroImage: $heroImage, 
           overview: $overview, 
@@ -242,6 +251,7 @@ export async function addProject(data: any): Promise<any> {
           url: $url, 
           category: $category
         ) {
+          type
           name 
           heroImage 
           overview 
@@ -308,6 +318,7 @@ export async function updateProject(data: any): Promise<any> {
     const query = `
       mutation UpdateProject(
         $id: ID!,
+        $type: String!,
         $name: String, 
         $heroImage: String, 
         $overview: String, 
@@ -319,6 +330,7 @@ export async function updateProject(data: any): Promise<any> {
       ) {
         updateProject(
           id: $id,
+          type: $type,
           name: $name, 
           heroImage: $heroImage, 
           overview: $overview, 
@@ -328,6 +340,7 @@ export async function updateProject(data: any): Promise<any> {
           url: $url, 
           category: $category
         ) {
+          type
           name 
           heroImage 
           overview 

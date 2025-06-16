@@ -1,6 +1,10 @@
 "use client";
 
-import { Projectcategory, ProjectType } from "@/constants/enums";
+import {
+  Projectcategory,
+  ProjectFieldTypes,
+  ProjectType,
+} from "@/constants/enums";
 import { fetchAllProjects, fetchProjectById } from "@/utils/serverActions.ut";
 import { useEffect, useState } from "react";
 import Header from "./ui/Header";
@@ -13,25 +17,29 @@ import AllProjectsSkeleton from "./ui/AllProjectsSkeleton";
 import SingleProjectSkeleton from "./ui/SingleProjectSkeleton";
 import { useAuth } from "@/contexts/AuthContext";
 
-const Projects = ({ initialProjects }: { initialProjects: ProjectType[] }) => {
+const Projects = ({
+  initialProjects,
+  type = ProjectType.PROJECT,
+}: {
+  initialProjects: ProjectFieldTypes[];
+  type?: ProjectType;
+}) => {
   const { isAdmin } = useAuth();
-  const [projects, setProjects] = useState<ProjectType[]>(initialProjects);
-  const [selectedProject, setSelectedProject] = useState<ProjectType | null>(
-    null
-  );
+  const [projects, setProjects] =
+    useState<ProjectFieldTypes[]>(initialProjects);
+  const [selectedProject, setSelectedProject] =
+    useState<ProjectFieldTypes | null>(null);
 
   const [loading, setLoading] = useState(false);
-  const [category, setCategory] = useState<string>(Projectcategory.ALL);
+  const [category, setCategory] = useState<Projectcategory>(
+    Projectcategory.ALL
+  );
   const [projectLoading, setProjectLoading] = useState(false);
-
-  useEffect(() => {
-    console.log("object", projects);
-  }, [projects]);
 
   useEffect(() => {
     setLoading(true);
     const fetchCategoryProjects = async () => {
-      const response = await fetchAllProjects(category);
+      const response = await fetchAllProjects(ProjectType.PROJECT, category);
       setProjects(response);
     };
 
@@ -65,7 +73,7 @@ const Projects = ({ initialProjects }: { initialProjects: ProjectType[] }) => {
 
   return (
     <section className="flex flex-col p-10 w-full">
-      <Header text="Projects" />
+      <Header text={type === ProjectType.PROJECT ? "Projects" : "Case Study"} />
       <div className="flex justify-between mb-6 items-center w-full">
         <div className="flex gap-10">
           {ProjectCategories.map((cat, i) => {
@@ -85,11 +93,13 @@ const Projects = ({ initialProjects }: { initialProjects: ProjectType[] }) => {
         {isAdmin && (
           <div
             onClick={() => {
-              window.location.href = "/project/add";
+              window.location.href = `/${
+                type === ProjectType.PROJECT ? "project" : "case-study"
+              }/add`;
             }}
             className="flex px-6 py-1 justify-center rounded-xl bg-secondary-100 hover:cursor-pointer hover:bg-secondary-100/80"
           >
-            Add Project
+            Add {type === ProjectType.PROJECT ? "Project" : "Case Study"}
           </div>
         )}
       </div>

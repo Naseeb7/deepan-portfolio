@@ -3,6 +3,7 @@ import { gql } from "graphql-tag";
 export default gql`
   type Project {
     id: ID!
+    type: String!
     name: String!
     heroImage: String
     overview: String
@@ -14,12 +15,13 @@ export default gql`
   }
 
   extend type Query {
-    projects(category: String): [Project!]!
+    projects(category: String, type: String): [Project!]!
     project(id: ID!): Project
   }
 
   extend type Mutation {
     addProject(
+      type: String!
       name: String!
       heroImage: String
       overview: String
@@ -31,6 +33,7 @@ export default gql`
     ): Project
     deleteProject(id: ID!): Boolean
     updateProject(
+      type: String
       id: ID!
       name: String
       heroImage: String
