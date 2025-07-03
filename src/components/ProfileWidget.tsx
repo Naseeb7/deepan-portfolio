@@ -9,7 +9,7 @@ const ProfileWidget = () => {
         <Image src={"/Profile.webp"} alt="Deepan" height={194} width={194} />
       </div>
       <div className="flex flex-col gap-3 items-center">
-        <span className="text-[28px] font-extrabold">DEEPANRAJ MURALI</span>
+        <span className="text-2xl font-extrabold">DEEPANRAJ MURALI</span>
         <span className="bg-brand-300 py-2 px-3 rounded-xl text-xl font-medium">
           UI/UX Designer
         </span>
