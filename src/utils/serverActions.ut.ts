@@ -1,5 +1,9 @@
 "use server";
-import { Projectcategory, ProjectType } from "@/constants/enums";
+import {
+  Projectcategory,
+  ProjectType,
+  RevalidateTags,
+} from "@/constants/enums";
 import { cookies } from "next/headers";
 
 export const fetchAllProjects = async (
@@ -30,7 +34,10 @@ export const fetchAllProjects = async (
           type,
         },
       }),
-      cache: "no-cache",
+      cache: "force-cache",
+      next: {
+        tags: [RevalidateTags.PROJECTS],
+      },
     }
   );
 
@@ -71,6 +78,9 @@ export const fetchProjectById = async (
         },
       }),
       cache: cache_strategy,
+      next: {
+        tags: [RevalidateTags.SINGLEPROJECTS],
+      },
     }
   );
 

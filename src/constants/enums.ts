@@ -22,3 +22,8 @@ export enum ProjectType {
   PROJECT = "project",
   CASE_STUDY = "case_study",
 }
+
+export enum RevalidateTags {
+  PROJECTS = "projects",
+  SINGLEPROJECTS = "singleProjects",
+}
