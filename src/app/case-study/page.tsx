@@ -4,7 +4,7 @@ import { fetchAllProjects } from "@/utils/serverActions.ut";
 
 export const revalidate = 604800; // Revalidate every 7 days
 
-const ProjectsPage = async () => {
+const CaseStudyPage = async () => {
   const projects = await fetchAllProjects(ProjectType.CASE_STUDY);
 
   return (
@@ -14,4 +14,4 @@ const ProjectsPage = async () => {
   );
 };
 
-export default ProjectsPage;
+export default CaseStudyPage;
